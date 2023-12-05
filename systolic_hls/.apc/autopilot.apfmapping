@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="systolic_test.h" path="/scratch/643_vitis_yuhez/systolic_array_hls/systolic_test.h"/>
+    <originFiles name="krnl_mmult.cpp" path="/scratch/643_vitis_yuhez/systolic_array_hls/krnl_mmult.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="systolic_test.cpp" path="/scratch/643_vitis_yuhez/systolic_array_hls/systolic_test.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

@@ -1,0 +1,128 @@
+
+
+================================================================
+== Synthesis Summary Report of 'krnl_mmult'
+================================================================
++ General Information: 
+    * Date:           Mon Dec  4 19:45:31 2023
+    * Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:07 MDT 2021)
+    * Project:        systolic_hls
+    * Solution:       solution1 (Vitis Kernel Flow Target)
+    * Product family: zynquplus
+    * Target device:  xczu3eg-sbva484-1-i
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +--------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+-----------+-----------+-------------+-------------+-----+
+    |                         Modules                        |  Issue |       | Latency |  Latency  | Iteration|         | Trip |          |           |           |             |             |     |
+    |                         & Loops                        |  Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|   BRAM    |    DSP    |      FF     |     LUT     | URAM|
+    +--------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+-----------+-----------+-------------+-------------+-----+
+    |+ krnl_mmult                                            |  Timing|  -0.00|        -|          -|         -|        -|     -|        no|  186 (43%)|  207 (57%)|  17097 (12%)|  25662 (36%)|    -|
+    | + grp_krnl_mmult_Pipeline_readA_readA_inner_fu_1519    |  Timing|  -0.00|        -|          -|         -|        -|     -|        no|          -|          -|   1183 (~0%)|     867 (1%)|    -|
+    |  o readA_readA_inner                                   |       -|   7.30|        -|          -|         3|        1|     -|       yes|          -|          -|            -|            -|    -|
+    | + grp_krnl_mmult_Pipeline_readB_readB_inner_fu_1536    |  Timing|  -0.00|        -|          -|         -|        -|     -|        no|          -|          -|   1183 (~0%)|     867 (1%)|    -|
+    |  o readB_readB_inner                                   |       -|   7.30|        -|          -|         3|        1|     -|       yes|          -|          -|            -|            -|    -|
+    | + grp_krnl_mmult_Pipeline_systolic1_fu_1553            |       -|   1.20|     4114|  4.114e+04|         -|     4114|     -|        no|          -|  192 (53%)|    6155 (4%)|  11557 (16%)|    -|
+    |  o systolic1                                           |       -|   7.30|     4112|  4.112e+04|         3|        1|  4111|       yes|          -|          -|            -|            -|    -|
+    | + grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1765  |  Timing|  -0.00|        -|          -|         -|        -|     -|        no|          -|          -|   1247 (~0%)|    3695 (5%)|    -|
+    |  o writeC_writeC_inner                                 |       -|   7.30|        -|          -|        71|        1|     -|       yes|          -|          -|            -|            -|    -|
+    | o outer_i                                              |       -|   7.30|        -|          -|         -|        -|     -|        no|          -|          -|            -|            -|    -|
+    |  o outer_j                                             |       -|   7.30|        -|          -|         -|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    |   o fill_C_inner                                       |       -|   7.30|        -|          -|         1|        -|     -|        no|          -|          -|            -|            -|    -|
+    +--------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+-----------+-----------+-------------+-------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* M_AXI
++------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+
+| Interface  | Data Width | Address Width | Latency | Offset | Register | Max Widen | Max Read     | Max Write    | Num Read    | Num Write   |
+|            | (SW->HW)   |               |         |        |          | Bitwidth  | Burst Length | Burst Length | Outstanding | Outstanding |
++------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+
+| m_axi_gmem | 32 -> 512  | 64            | 64      | slave  | 0        | 512       | 16           | 16           | 16          | 16          |
++------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+
+
+* S_AXILITE
++---------------+------------+---------------+--------+----------+
+| Interface     | Data Width | Address Width | Offset | Register |
++---------------+------------+---------------+--------+----------+
+| s_axi_control | 32         | 7             | 16     | 0        |
++---------------+------------+---------------+--------+----------+
+
+* TOP LEVEL CONTROL
++-----------+---------------+-----------+
+| Interface | Type          | Ports     |
++-----------+---------------+-----------+
+| ap_clk    | clock         | ap_clk    |
+| ap_rst_n  | reset         | ap_rst_n  |
+| interrupt | interrupt     | interrupt |
+| ap_ctrl   | ap_ctrl_chain |           |
++-----------+---------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+-------------+
+| Argument | Direction | Datatype    |
++----------+-----------+-------------+
+| a        | inout     | int const * |
+| b        | inout     | int const * |
+| c        | inout     | int*        |
+| a_row    | in        | int         |
+| a_col    | in        | int         |
+| b_col    | in        | int         |
++----------+-----------+-------------+
+
+* SW-to-HW Mapping
++----------+---------------------+-----------+----------+-----------------------+
+| Argument | HW Name             | HW Type   | HW Usage | HW Info               |
++----------+---------------------+-----------+----------+-----------------------+
+| a        | m_axi_gmem          | interface |          |                       |
+| a        | s_axi_control a_1   | register  | offset   | offset=0x10, range=32 |
+| a        | s_axi_control a_2   | register  | offset   | offset=0x14, range=32 |
+| b        | m_axi_gmem          | interface |          |                       |
+| b        | s_axi_control b_1   | register  | offset   | offset=0x1c, range=32 |
+| b        | s_axi_control b_2   | register  | offset   | offset=0x20, range=32 |
+| c        | m_axi_gmem          | interface |          |                       |
+| c        | s_axi_control c_1   | register  | offset   | offset=0x28, range=32 |
+| c        | s_axi_control c_2   | register  | offset   | offset=0x2c, range=32 |
+| a_row    | s_axi_control a_row | register  |          | offset=0x34, range=32 |
+| a_col    | s_axi_control a_col | register  |          | offset=0x3c, range=32 |
+| b_col    | s_axi_control b_col | register  |          | offset=0x44, range=32 |
++----------+---------------------+-----------+----------+-----------------------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+* Burst Summary
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+
+| HW Interface | Message                                                                                                                                                                                                                    | Location              |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+
+| m_axi_gmem   | Multiple burst reads of length 2048 and bit width 512. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. | krnl_mmult.cpp:198:9  |
+| m_axi_gmem   | Multiple burst reads of length 2048 and bit width 512. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. | krnl_mmult.cpp:221:13 |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+
+
+* Bursts and Widening Missed
++--------------+----------+--------------+------------------------------------------------+------------+-----------------------+
+| HW Interface | Variable | Loop         | Problem                                        | Resolution | Location              |
++--------------+----------+--------------+------------------------------------------------+------------+-----------------------+
+| m_axi_gmem   | c        | writeC       | Stride is incompatible                         | 214-230    | krnl_mmult.cpp:265:13 |
+| m_axi_gmem   | c        | writeC_inner | Sequential access length is not divisible by 2 | 214-234    | krnl_mmult.cpp:267:17 |
+| m_axi_gmem   | c        | writeC_inner | Sequential access length is not divisible by 2 | 214-234    | krnl_mmult.cpp:267:17 |
++--------------+----------+--------------+------------------------------------------------+------------+-----------------------+
+
+    * Resolution URL: www.xilinx.com/cgi-bin/docs/rdoc?v=2021.1;t=hls+guidance;d=XXX-YYY.html (replace XXX-YYY with column value)
+

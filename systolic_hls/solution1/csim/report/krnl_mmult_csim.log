@@ -1,0 +1,13 @@
+INFO: [SIM 2] *************** CSIM start ***************
+INFO: [SIM 4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../systolic_test.cpp in debug mode
+   Compiling ../../../../krnl_mmult.cpp in debug mode
+   Generating csim.exe
+starting krnl_mmult
+finished krnl_mmult
+starting sw_mmult
+finished sw_mmult
+start compare:
+TEST PASSED
+INFO: [SIM 1] CSim done with 0 errors.
+INFO: [SIM 3] *************** CSIM finish ***************

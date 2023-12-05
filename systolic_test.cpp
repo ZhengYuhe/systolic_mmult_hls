@@ -2,10 +2,9 @@
 #include <vector>
 
 // Array Size to access
-#define DATA_SIZE 8
+#define DATA_SIZE 64
 
-// Maximum Array Size
-#define MAX_SIZE 8
+
 
 // Software implementation of Matrix Multiplication
 // The inputs are of the size (DATA_SIZE x DATA_SIZE)
@@ -14,10 +13,10 @@ void m_softwareGold(int *in1, // Input Matrix 1
                     int *out  // Output Matrix
                     ) {
     // Perform Matrix multiply Out = In1 x In2
-    for (int i = 0; i < DATA_SIZE; i++) {
-        for (int j = 0; j < DATA_SIZE; j++) {
-            for (int k = 0; k < DATA_SIZE; k++) {
-                out[i * DATA_SIZE + j] += in1[i * DATA_SIZE + k] * in2[k * DATA_SIZE + j];
+    for (int i = 0; i < DATA_SIZE; i++){
+        for (int j = 0; j < DATA_SIZE; j++){
+            for (int k = 0; k < DATA_SIZE; k++){
+                out[i * DATA_SIZE + j] += in1[i * DATA_SIZE + k] * in2[j * DATA_SIZE + k];
             }
         }
     }
@@ -66,10 +65,17 @@ int main() {
     int a_col = DATA_SIZE;
     int b_col = DATA_SIZE;
 
+    std::cout << "starting krnl_mmult" << std::endl;
     krnl_mmult(source_in1, source_in2, source_hw_results, a_row, a_col, b_col);
+    std::cout << "finished krnl_mmult" << std::endl;
+
+    std::cout << "starting sw_mmult" << std::endl;
     m_softwareGold(source_in1, source_in2, source_sw_results);
+    std::cout << "finished sw_mmult" << std::endl;
 
     // Compare the results of the Device to the simulation
+
+    std::cout << "start compare:" << std::endl;
     int match = 0;
     for (int i = 0; i < DATA_SIZE * DATA_SIZE; i++) {
         if (source_hw_results[i] != source_sw_results[i]) {
