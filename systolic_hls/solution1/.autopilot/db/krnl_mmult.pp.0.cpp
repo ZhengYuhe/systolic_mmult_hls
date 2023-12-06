@@ -990,8 +990,8 @@ extern void funlockfile (FILE *__stream) throw ();
 # 943 "/usr/include/stdio.h" 3 4
 }
 # 152 "krnl_mmult.cpp" 2
-# 161 "krnl_mmult.cpp"
-const unsigned int c_size = 8;
+# 163 "krnl_mmult.cpp"
+const unsigned int c_size = 4;
 
 extern "C" {
 __attribute__((sdx_kernel("krnl_mmult", 0))) void krnl_mmult(const int* a,
@@ -1002,7 +1002,7 @@ __attribute__((sdx_kernel("krnl_mmult", 0))) void krnl_mmult(const int* a,
            int b_col
            ) {
 #pragma HLS TOP name=krnl_mmult
-# 170 "krnl_mmult.cpp"
+# 172 "krnl_mmult.cpp"
 
 
     int b_row = a_col;
@@ -1011,82 +1011,110 @@ __attribute__((sdx_kernel("krnl_mmult", 0))) void krnl_mmult(const int* a,
 
 
 
-    int localA[8][4096];
+    int localA[4][4][(4096 / 4)];
 #pragma HLS ARRAY_PARTITION variable = localA dim = 1 complete
+#pragma HLS ARRAY_PARTITION variable = localA dim = 2 complete
 
 
- int localB[4096][8];
-#pragma HLS ARRAY_PARTITION variable = localB dim = 2 complete
+ int localB[4][(4096 / 4)][4];
+#pragma HLS ARRAY_PARTITION variable = localB dim = 1 complete
+#pragma HLS ARRAY_PARTITION variable = localB dim = 3 complete
 
- int localC[8][8];
+ int localC[4][4];
 #pragma HLS ARRAY_PARTITION variable = localC dim = 0 complete
 
- int bufA[8][8];
+ int bufC[4][4][4];
+#pragma HLS ARRAY_PARTITION variable = bufC dim = 0 complete
+
+ int bufA[4][4][4];
 #pragma HLS ARRAY_PARTITION variable = bufA dim = 0 complete
 
- int bufB[8][8];
+ int bufB[4][4][4];
 #pragma HLS ARRAY_PARTITION variable = bufB dim = 0 complete
 
  outer_i:
-    for(int i0=0; i0<4096; i0+=8){
-
+    for(int i0=0; i0<4096; i0+=4){
+# 213 "krnl_mmult.cpp"
         readA:
-        for(int i = i0; i < i0+8; i++){
-            readA_inner:
-            for (int k = 0; k < 4096; k++){
-                localA[i-i0][k] = a[i * 4096 + k];
+        for (int i = i0; i < i0+4; i ++){
+            readA_i:
+            for (int t = 0; t < 4; t ++){
+                readA_k:
+                for (int k = 0; k < (4096 / 4); k ++){
+                    localA[t][i-i0][k] = a[i * 4096 + t * (4096 / 4) + k];
+                }
             }
         }
 
+
         outer_j:
-        for(int j0=0; j0<4096; j0+=8){
+        for(int j0=0; j0<4096; j0+=4){
 
-            fill_C:
-            for(int i = i0; i < i0+8; i++){
+            fill_PE:
+            for (int t = 0; t < 4; t++){
 #pragma HLS UNROLL
- fill_C_inner:
-                for (int j = j0; j < j0+8; j ++){
+ fill_PE_i:
+                for(int i = 0; i < 4; i++){
+#pragma HLS UNROLL
+ fill_PE_j:
+                    for (int j = 0; j < 4; j++){
 #pragma HLS UNROLL
 
- localC[i-i0][j-j0] = 0;
+ bufC[t][i][j] = 0;
+                        bufA[t][i][j] = 0;
+                        bufB[t][i][j] = 0;
+                    }
                 }
             }
 
-
+            fill_localC:
+            for (int i = 0; i < 4; i++){
+                fill_localC_inner:
+                for (int j = 0; j < 4; j++){
+                    localC[i][j] = 0;
+                }
+            }
+# 264 "krnl_mmult.cpp"
             readB:
-            for(int j = j0; j < j0+8; j ++){
-                readB_inner:
-                for (int k = 0; k < 4096; k++){
-                    localB[k][j-j0] = b[j * 4096 + k];
+            for (int j = j0; j < j0+4; j ++){
+                readB_j:
+                for (int t = 0; t < 4; t ++){
+                    readB_k:
+                    for (int k = 0; k < (4096 / 4); k ++){
+                        localB[t][k][j-j0] = b[j * 4096 + t * (4096 / 4) + k];
+                    }
                 }
             }
-
-
-            fill_bufAB:
-            for (int i = 0; i < 8; i++){
-#pragma HLS UNROLL
- fillAB_inner:
-                for (int j = 0; j < 8; j ++){
-#pragma HLS UNROLL
- bufA[i][j] = 0;
-                    bufB[i][j] = 0;
-                }
-            }
-
-
-
-            systolic1:
-            for (int k = 0; k < (2*8 + 4096 -1); k ++) {
+# 289 "krnl_mmult.cpp"
+            systolick:
+            for (int k = 0; k < (2*4 + (4096 / 4) -1); k ++) {
 #pragma HLS pipeline
- systolic2:
-                for (int i = 8 -1; i >= 0; i--) {
-                    systolic3:
-                    for (int j = 8 -1; j >= 0; j--) {
-                        if((i+j<=k)&&(k<i+j+4096)){
-                            bufA[i][j] = (j > 0) ? bufA[i][j-1] : localA[i][k - i];
-                            bufB[i][j] = (i > 0) ? bufB[i-1][j] : localB[k - j][j];
-                            localC[i][j] += bufA[i][j] * bufB[i][j];
+ systolict:
+                for (int t = 0; t < 4; t ++){
+                    systolici:
+                    for (int i = 4 -1; i >= 0; i--) {
+                        systolicj:
+                        for (int j = 4 -1; j >= 0; j--) {
+                            if((i+j<=k)&&(k<i+j+(4096 / 4))){
+                                bufA[t][i][j] = (j > 0) ? bufA[t][i][j-1] : localA[t][i][k - i];
+                                bufB[t][i][j] = (i > 0) ? bufB[t][i-1][j] : localB[t][k - j][j];
+                                bufC[t][i][j] += bufA[t][i][j] * bufB[t][i][j];
+                            }
                         }
+                    }
+                }
+
+            }
+
+
+            Accum_C:
+            for (int t = 0; t < 4; t++){
+#pragma HLS pipeline
+ Accum_C_i:
+                for (int i = 0; i < 4; i++){
+                    Accum_C_j:
+                    for (int j = 0; j < 4; j++){
+                        localC[i][j] += bufC[t][i][j];
                     }
                 }
             }
@@ -1096,11 +1124,10 @@ __attribute__((sdx_kernel("krnl_mmult", 0))) void krnl_mmult(const int* a,
 
 
 
-
             writeC:
-            for (int i = i0; i < i0+8; i ++ ){
+            for (int i = i0; i < i0+4; i ++ ){
                 writeC_inner:
-                for (int j = j0; j < j0+8; j ++){
+                for (int j = j0; j < j0+4; j ++){
                     c[i * 4096 + j] = localC[i - i0][j-j0];
                 }
             }

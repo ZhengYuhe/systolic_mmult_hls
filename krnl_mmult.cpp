@@ -152,8 +152,10 @@ Kernel Description :
 
 
 // Maximum Array Size
-#define TILE_SIZE 8
 #define DATA_SIZE 4096
+#define TILE_SIZE 4
+#define BATCH_SIZE 4
+#define DIM_K (DATA_SIZE / BATCH_SIZE)
 //#define SHIFT_BUFFER_LEN (TILE_SIZE * 2 -1)
 
 
@@ -175,86 +177,147 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
 
     
     // Local memory to store input and output matrices
-    int localA[TILE_SIZE][DATA_SIZE];
+    int localA[BATCH_SIZE][TILE_SIZE][DIM_K];
     #pragma HLS ARRAY_PARTITION variable = localA dim = 1 complete
+    #pragma HLS ARRAY_PARTITION variable = localA dim = 2 complete
     //#pragma HLS ARRAY_PARTITION variable=localA dim =2 factor=2 type=cyclic
     
-    int localB[DATA_SIZE][TILE_SIZE];
-    #pragma HLS ARRAY_PARTITION variable = localB dim = 2 complete
+    int localB[BATCH_SIZE][DIM_K][TILE_SIZE];
+    #pragma HLS ARRAY_PARTITION variable = localB dim = 1 complete
+    #pragma HLS ARRAY_PARTITION variable = localB dim = 3 complete
 
     int localC[TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = localC dim = 0 complete
 
-    int bufA[TILE_SIZE][TILE_SIZE];
+    int bufC[BATCH_SIZE][TILE_SIZE][TILE_SIZE];
+    #pragma HLS ARRAY_PARTITION variable = bufC dim = 0 complete
+
+    int bufA[BATCH_SIZE][TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = bufA dim = 0 complete
 
-    int bufB[TILE_SIZE][TILE_SIZE];
+    int bufB[BATCH_SIZE][TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = bufB dim = 0 complete    
 
     outer_i:
     for(int i0=0; i0<DATA_SIZE; i0+=TILE_SIZE){
 
+        // readA:
+        // for(int i = i0; i < i0+TILE_SIZE; i++){
+        //     readA_inner:
+        //     for (int k = 0; k < DATA_SIZE; k++){
+        //         localA[i-i0][k] = a[i * DATA_SIZE + k];
+        //     }
+        // }
+
+       
         readA:
-        for(int i = i0; i < i0+TILE_SIZE; i++){
-            readA_inner:
-            for (int k = 0; k < DATA_SIZE; k++){
-                localA[i-i0][k] = a[i * DATA_SIZE + k];
+        for (int i = i0; i < i0+TILE_SIZE; i ++){
+            readA_i:
+            for (int t = 0; t < BATCH_SIZE; t ++){
+                readA_k:
+                for (int k = 0; k < DIM_K; k ++){
+                    localA[t][i-i0][k] = a[i * DATA_SIZE + t * DIM_K + k];
+                }
             }
         }
+
 
         outer_j:
         for(int j0=0; j0<DATA_SIZE; j0+=TILE_SIZE){
             
-            fill_C:
-            for(int i = i0; i < i0+TILE_SIZE; i++){
+            fill_PE:
+            for (int t = 0; t < BATCH_SIZE; t++){
                 #pragma HLS UNROLL
-                fill_C_inner:
-                for (int j = j0; j < j0+TILE_SIZE; j ++){
+                fill_PE_i:
+                for(int i = 0; i < TILE_SIZE; i++){
                     #pragma HLS UNROLL
-                    //localC[i-i0][j-j0] = c[i * DATA_SIZE + j];
-                    localC[i-i0][j-j0] = 0;
-                }
-            }
-
-            
-            readB: 
-            for(int j = j0; j < j0+TILE_SIZE; j ++){
-                readB_inner: 
-                for (int k = 0; k < DATA_SIZE; k++){
-                    localB[k][j-j0] = b[j * DATA_SIZE + k];
-                }
-            }
-
-            
-            fill_bufAB:
-            for (int i = 0; i < TILE_SIZE; i++){
-                #pragma HLS UNROLL
-                fillAB_inner:
-                for (int j = 0; j < TILE_SIZE; j ++){
-                    #pragma HLS UNROLL
-                    bufA[i][j] = 0;
-                    bufB[i][j] = 0;
-                }
-            }
-
-
-                
-            systolic1:
-            for (int k = 0; k < (2*TILE_SIZE + DATA_SIZE -1); k ++) {
-            #pragma HLS pipeline
-                systolic2:
-                for (int i = TILE_SIZE-1; i >= 0; i--) {
-                    systolic3:
-                    for (int j = TILE_SIZE-1; j >= 0; j--) {
-                        if((i+j<=k)&&(k<i+j+DATA_SIZE)){
-                            bufA[i][j] = (j > 0) ? bufA[i][j-1] : localA[i][k - i];
-                            bufB[i][j] = (i > 0) ? bufB[i-1][j] : localB[k - j][j];
-                            localC[i][j] += bufA[i][j] * bufB[i][j];
-                        }
+                    fill_PE_j:
+                    for (int j = 0; j < TILE_SIZE; j++){
+                        #pragma HLS UNROLL
+                        //bufC[i-i0][j-j0] = c[i * DATA_SIZE + j];
+                        bufC[t][i][j] = 0;
+                        bufA[t][i][j] = 0;
+                        bufB[t][i][j] = 0;
                     }
                 }
             }
+
+            fill_localC:
+            for (int i = 0; i < TILE_SIZE; i++){
+                fill_localC_inner:
+                for (int j = 0; j < TILE_SIZE; j++){
+                    localC[i][j] = 0;
+                }
+            }
+            
+
+
+            
+            // readB: 
+            // for(int j = j0; j < j0+TILE_SIZE; j ++){
+            //     readB_inner: 
+            //     for (int k = 0; k < DATA_SIZE; k++){
+            //         localB[k][j-j0] = b[j * DATA_SIZE + k];
+            //     }
+            // }
+
+            readB:
+            for (int j = j0; j < j0+TILE_SIZE; j ++){
+                readB_j:
+                for (int t = 0; t < BATCH_SIZE; t ++){
+                    readB_k:
+                    for (int k = 0; k < DIM_K; k ++){
+                        localB[t][k][j-j0] = b[j * DATA_SIZE + t * DIM_K + k];
+                    }
+                }
+            }
+
+            
+            // fill_bufAB:
+            // for (int i = 0; i < TILE_SIZE; i++){
+            //     #pragma HLS UNROLL
+            //     fillAB_inner:
+            //     for (int j = 0; j < TILE_SIZE; j ++){
+            //         #pragma HLS UNROLL
+            //         bufA[i][j] = 0;
+            //         bufB[i][j] = 0;
+            //     }
+            // }
+
+
                 
+            systolick:
+            for (int k = 0; k < (2*TILE_SIZE + DIM_K -1); k ++) {
+            #pragma HLS pipeline
+                systolict:
+                for (int t = 0; t < BATCH_SIZE; t ++){
+                    systolici:
+                    for (int i = TILE_SIZE-1; i >= 0; i--) {
+                        systolicj:
+                        for (int j = TILE_SIZE-1; j >= 0; j--) {
+                            if((i+j<=k)&&(k<i+j+DIM_K)){
+                                bufA[t][i][j] = (j > 0) ? bufA[t][i][j-1] : localA[t][i][k - i];
+                                bufB[t][i][j] = (i > 0) ? bufB[t][i-1][j] : localB[t][k - j][j];
+                                bufC[t][i][j] += bufA[t][i][j] * bufB[t][i][j];
+                            }
+                        }
+                    }
+                }
+                
+            }
+
+            
+            Accum_C:
+            for (int t = 0; t < BATCH_SIZE; t++){
+                #pragma HLS pipeline
+                Accum_C_i:
+                for (int i = 0; i < TILE_SIZE; i++){
+                    Accum_C_j:
+                    for (int j = 0; j < TILE_SIZE; j++){
+                        localC[i][j] += bufC[t][i][j];
+                    }
+                }
+            }
                 
 
 

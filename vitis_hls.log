@@ -1,17 +1,17 @@
 INFO: Applying HLS Y2K22 patch v1.2 for IP revision
 INFO: [HLS 200-10] Running '/afs/ece.cmu.edu/class/ece643/software/xilinxVitis/Vitis_HLS/2021.1/bin/unwrapped/lnx64.o/vitis_hls'
-INFO: [HLS 200-10] For user 'yuhez' on host 'ECE011.ece.local.cmu.edu' (Linux_x86_64 version 3.10.0-1160.99.1.el7.x86_64) on Mon Dec 04 19:44:49 EST 2023
+INFO: [HLS 200-10] For user 'yuhez' on host 'ECE011.ece.local.cmu.edu' (Linux_x86_64 version 3.10.0-1160.99.1.el7.x86_64) on Tue Dec 05 21:21:25 EST 2023
 INFO: [HLS 200-10] On os "Red Hat Enterprise Linux Server release 7.9 (Maipo)"
 INFO: [HLS 200-10] In directory '/scratch/643_vitis_yuhez/systolic_array_hls'
 Sourcing Tcl script '/scratch/643_vitis_yuhez/systolic_array_hls/systolic_hls/solution1/csynth.tcl'
 INFO: [HLS 200-1510] Running: open_project systolic_hls 
 INFO: [HLS 200-10] Opening project '/scratch/643_vitis_yuhez/systolic_array_hls/systolic_hls'.
 INFO: [HLS 200-1510] Running: set_top krnl_mmult 
-INFO: [HLS 200-1510] Running: add_files krnl_mmult.cpp 
-INFO: [HLS 200-10] Adding design file 'krnl_mmult.cpp' to the project
 INFO: [HLS 200-1510] Running: add_files systolic_test.h 
 INFO: [HLS 200-10] Adding design file 'systolic_test.h' to the project
-INFO: [HLS 200-1510] Running: add_files -tb systolic_test.cpp 
+INFO: [HLS 200-1510] Running: add_files krnl_mmult.cpp 
+INFO: [HLS 200-10] Adding design file 'krnl_mmult.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb systolic_test.cpp -cflags -Wno-unknown-pragmas -csimflags -Wno-unknown-pragmas 
 INFO: [HLS 200-10] Adding test bench file 'systolic_test.cpp' to the project
 INFO: [HLS 200-1510] Running: open_solution solution1 -flow_target vitis 
 INFO: [HLS 200-10] Opening solution '/scratch/643_vitis_yuhez/systolic_array_hls/systolic_hls/solution1'.
@@ -28,112 +28,163 @@ INFO: [HLS 200-1510] Running: set_part xczu3eg-sbva484-1-i
 INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
 INFO: [HLS 200-1510] Running: config_interface -m_axi_alignment_byte_size 64 -m_axi_latency 64 -m_axi_max_widen_bitwidth 512 
 INFO: [HLS 200-1510] Running: config_rtl -register_reset_num 3 
+INFO: [HLS 200-1510] Running: set_directive_top -name krnl_mmult krnl_mmult 
 INFO: [HLS 200-1510] Running: csynth_design 
-INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.01 seconds; current allocated memory: 252.583 MB.
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.01 seconds; current allocated memory: 252.568 MB.
 INFO: [HLS 200-10] Analyzing design file 'krnl_mmult.cpp' ... 
-INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.54 seconds. CPU system time: 0.71 seconds. Elapsed time: 1.27 seconds; current allocated memory: 252.924 MB.
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.56 seconds. CPU system time: 0.68 seconds. Elapsed time: 1.26 seconds; current allocated memory: 252.925 MB.
 INFO: [HLS 200-777] Using interface defaults for 'Vitis' flow target.
 INFO: [HLS 214-279] Initial Interval estimation mode is set into default.
 INFO: [HLS 214-284] Auto array partition mode is set into default.
-INFO: [HLS 214-186] Unrolling loop 'fill_C' (krnl_mmult.cpp:209:13) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fill_bufAB' (krnl_mmult.cpp:230:13) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-INFO: [HLS 214-186] Unrolling loop 'fillAB_inner' (krnl_mmult.cpp:233:17) in function 'krnl_mmult' completely with a factor of 8 (krnl_mmult.cpp:170:0)
-WARNING: [HLS 214-281] Estimating pipelined loop 'systolic1' (krnl_mmult.cpp:243:13) in function 'krnl_mmult' with estimated II increased from II=1 to II=+infinity because of cyclic dependence on variable 'bufA' (krnl_mmult.cpp:243:13)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE' (krnl_mmult.cpp:229:13) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_i' (krnl_mmult.cpp:232:17) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_i' (krnl_mmult.cpp:232:17) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_i' (krnl_mmult.cpp:232:17) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_i' (krnl_mmult.cpp:232:17) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+INFO: [HLS 214-186] Unrolling loop 'fill_PE_j' (krnl_mmult.cpp:235:21) in function 'krnl_mmult' completely with a factor of 4 (krnl_mmult.cpp:172:0)
+WARNING: [HLS 214-281] Estimating pipelined loop 'systolick' (krnl_mmult.cpp:290:13) in function 'krnl_mmult' with estimated II increased from II=1 to II=+infinity because of cyclic dependence on variable 'bufC' (krnl_mmult.cpp:290:13)
+WARNING: [HLS 214-281] Estimating pipelined loop 'Accum_C' (krnl_mmult.cpp:311:13) in function 'krnl_mmult' with estimated II increased from II=1 to II=+infinity because of cyclic dependence on variable 'localC' (krnl_mmult.cpp:311:13)
 INFO: [HLS 214-270] Starting automatic array partition analysis...
-INFO: [HLS 214-115] Multiple burst reads of length 2048 and bit width 512 has been inferred on port 'gmem'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (krnl_mmult.cpp:198:9)
-INFO: [HLS 214-115] Multiple burst reads of length 2048 and bit width 512 has been inferred on port 'gmem'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (krnl_mmult.cpp:221:13)
-INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 7.58 seconds. CPU system time: 0.87 seconds. Elapsed time: 8.62 seconds; current allocated memory: 257.409 MB.
-INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 257.410 MB.
+INFO: [HLS 214-115] Multiple burst reads of length 1024 and bit width 512 has been inferred on port 'gmem'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (krnl_mmult.cpp:214:9)
+INFO: [HLS 214-115] Multiple burst reads of length 1024 and bit width 512 has been inferred on port 'gmem'. These bursts requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (krnl_mmult.cpp:265:13)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 8.67 seconds. CPU system time: 1.01 seconds. Elapsed time: 9.86 seconds; current allocated memory: 258.194 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 258.195 MB.
 INFO: [HLS 200-10] Starting code transformations ...
-INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.11 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.14 seconds; current allocated memory: 259.542 MB.
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.14 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.15 seconds; current allocated memory: 260.414 MB.
 INFO: [HLS 200-10] Checking synthesizability ...
-INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.09 seconds. CPU system time: 0 seconds. Elapsed time: 0.11 seconds; current allocated memory: 258.461 MB.
-INFO: [XFORM 203-510] Pipelining loop 'readA_inner' (krnl_mmult.cpp:200) in function 'krnl_mmult' automatically.
-INFO: [XFORM 203-510] Pipelining loop 'readB_inner' (krnl_mmult.cpp:223) in function 'krnl_mmult' automatically.
-INFO: [XFORM 203-510] Pipelining loop 'writeC_inner' (krnl_mmult.cpp:267) in function 'krnl_mmult' automatically.
-INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'systolic1' (krnl_mmult.cpp:243) in function 'krnl_mmult' for pipelining.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-WARNING: [HLS 200-932] Cannot unroll loop 'fill_C_inner' (krnl_mmult.cpp:212) in function 'krnl_mmult' completely: variable loop bound.
-INFO: [HLS 200-489] Unrolling loop 'systolic2' (krnl_mmult.cpp:246) in function 'krnl_mmult' completely with a factor of 8.
-INFO: [HLS 200-489] Unrolling loop 'systolic3' (krnl_mmult.cpp:248) in function 'krnl_mmult' completely with a factor of 8.
-INFO: [XFORM 203-101] Partitioning array 'localA' (krnl_mmult.cpp:178) in dimension 1 completely.
-INFO: [XFORM 203-101] Partitioning array 'localB' (krnl_mmult.cpp:182) in dimension 2 completely.
-INFO: [XFORM 203-101] Partitioning array 'localC' (krnl_mmult.cpp:185) in dimension 1 completely.
-INFO: [XFORM 203-101] Partitioning array 'bufA' (krnl_mmult.cpp:188) in dimension 1 completely.
-INFO: [XFORM 203-101] Partitioning array 'bufB' (krnl_mmult.cpp:191) in dimension 1 completely.
-INFO: [XFORM 203-101] Partitioning array 'localC' (krnl_mmult.cpp:185) in dimension 2 completely.
-INFO: [XFORM 203-101] Partitioning array 'bufA' (krnl_mmult.cpp:188) in dimension 2 completely.
-INFO: [XFORM 203-101] Partitioning array 'bufB' (krnl_mmult.cpp:191) in dimension 2 completely.
-WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'localA[0]' in function 'krnl_mmult'.
-INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (krnl_mmult.cpp:243:22) in function 'krnl_mmult'... converting 129 basic blocks.
-INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1.79 seconds. CPU system time: 0.08 seconds. Elapsed time: 2.02 seconds; current allocated memory: 284.068 MB.
-INFO: [XFORM 203-541] Flattening a loop nest 'readA' (krnl_mmult.cpp:198:17) in function 'krnl_mmult'.
-INFO: [XFORM 203-541] Flattening a loop nest 'readB' (krnl_mmult.cpp:221:21) in function 'krnl_mmult'.
-INFO: [XFORM 203-541] Flattening a loop nest 'writeC' (krnl_mmult.cpp:265:22) in function 'krnl_mmult'.
-WARNING: [HLS 200-960] Cannot flatten loop 'outer_j' (krnl_mmult.cpp:206:17) in function 'krnl_mmult' more than one sub loop.
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.11 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.12 seconds; current allocated memory: 259.393 MB.
+INFO: [XFORM 203-510] Pipelining loop 'readA_k' (krnl_mmult.cpp:218) in function 'krnl_mmult' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'fill_localC_inner' (krnl_mmult.cpp:248) in function 'krnl_mmult' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'readB_k' (krnl_mmult.cpp:269) in function 'krnl_mmult' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'writeC_inner' (krnl_mmult.cpp:330) in function 'krnl_mmult' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'systolick' (krnl_mmult.cpp:290) in function 'krnl_mmult' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'Accum_C' (krnl_mmult.cpp:311) in function 'krnl_mmult' for pipelining.
+INFO: [HLS 200-489] Unrolling loop 'systolict' (krnl_mmult.cpp:293) in function 'krnl_mmult' completely with a factor of 4.
+INFO: [HLS 200-489] Unrolling loop 'systolici' (krnl_mmult.cpp:295) in function 'krnl_mmult' completely with a factor of 4.
+INFO: [HLS 200-489] Unrolling loop 'systolicj' (krnl_mmult.cpp:297) in function 'krnl_mmult' completely with a factor of 4.
+INFO: [HLS 200-489] Unrolling loop 'Accum_C_i' (krnl_mmult.cpp:314) in function 'krnl_mmult' completely with a factor of 4.
+INFO: [HLS 200-489] Unrolling loop 'Accum_C_j' (krnl_mmult.cpp:316) in function 'krnl_mmult' completely with a factor of 4.
+INFO: [XFORM 203-101] Partitioning array 'localA' (krnl_mmult.cpp:180) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'localB' (krnl_mmult.cpp:185) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'localC' (krnl_mmult.cpp:189) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufC' (krnl_mmult.cpp:192) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufA' (krnl_mmult.cpp:195) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufB' (krnl_mmult.cpp:198) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'localA' (krnl_mmult.cpp:180) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'localB' (krnl_mmult.cpp:185) in dimension 3 completely.
+INFO: [XFORM 203-101] Partitioning array 'localC' (krnl_mmult.cpp:189) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufC' (krnl_mmult.cpp:192) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufA' (krnl_mmult.cpp:195) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufB' (krnl_mmult.cpp:198) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufC' (krnl_mmult.cpp:192) in dimension 3 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufA' (krnl_mmult.cpp:195) in dimension 3 completely.
+INFO: [XFORM 203-101] Partitioning array 'bufB' (krnl_mmult.cpp:198) in dimension 3 completely.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'localA[0][0]' in function 'krnl_mmult'.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'localA[1][0]' in function 'krnl_mmult'.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'localA[2][0]' in function 'krnl_mmult'.
+WARNING: [ANALYSIS 214-31] The program may have out of bound access of array variable 'localA[3][0]' in function 'krnl_mmult'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (krnl_mmult.cpp:290:22) in function 'krnl_mmult'... converting 129 basic blocks.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 1.16 seconds. CPU system time: 0.05 seconds. Elapsed time: 1.34 seconds; current allocated memory: 284.600 MB.
+INFO: [XFORM 203-541] Flattening a loop nest 'readA_i' (krnl_mmult.cpp:216:22) in function 'krnl_mmult'.
+INFO: [XFORM 203-541] Flattening a loop nest 'readA' (krnl_mmult.cpp:214:18) in function 'krnl_mmult'.
+INFO: [XFORM 203-541] Flattening a loop nest 'fill_localC' (krnl_mmult.cpp:246:22) in function 'krnl_mmult'.
+INFO: [XFORM 203-541] Flattening a loop nest 'readB_j' (krnl_mmult.cpp:267:26) in function 'krnl_mmult'.
+INFO: [XFORM 203-541] Flattening a loop nest 'readB' (krnl_mmult.cpp:265:22) in function 'krnl_mmult'.
+INFO: [XFORM 203-541] Flattening a loop nest 'writeC' (krnl_mmult.cpp:328:22) in function 'krnl_mmult'.
+WARNING: [HLS 200-960] Cannot flatten loop 'outer_j' (krnl_mmult.cpp:226:17) in function 'krnl_mmult' more than one sub loop.
 Resolution: For help on HLS 200-960 see www.xilinx.com/cgi-bin/docs/rdoc?v=2021.1;t=hls+guidance;d=200-960.html
-WARNING: [HLS 200-960] Cannot flatten loop 'outer_i' (krnl_mmult.cpp:195:13) in function 'krnl_mmult' more than one sub loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'outer_i' (krnl_mmult.cpp:202:13) in function 'krnl_mmult' more than one sub loop.
 Resolution: For help on HLS 200-960 see www.xilinx.com/cgi-bin/docs/rdoc?v=2021.1;t=hls+guidance;d=200-960.html
-INFO: [HLS 200-472] Inferring partial write operation for 'localB[0]' (krnl_mmult.cpp:224:37)
-INFO: [HLS 200-472] Inferring partial write operation for 'localA[0]' (krnl_mmult.cpp:201:33)
-INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.68 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.72 seconds; current allocated memory: 326.111 MB.
+INFO: [HLS 200-472] Inferring partial write operation for 'localB[0][0]' (krnl_mmult.cpp:270:44)
+INFO: [HLS 200-472] Inferring partial write operation for 'localA[0][0]' (krnl_mmult.cpp:219:40)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.98 seconds. CPU system time: 0.08 seconds. Elapsed time: 1.11 seconds; current allocated memory: 345.397 MB.
 INFO: [HLS 200-10] Starting hardware synthesis ...
 INFO: [HLS 200-10] Synthesizing 'krnl_mmult' ...
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_readA_readA_inner' 
+INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_readA_readA_i_readA_k' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [SCHED 204-11] Starting scheduling ...
-INFO: [SCHED 204-61] Pipelining loop 'readA_readA_inner'.
-INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 4, loop 'readA_readA_inner'
+INFO: [SCHED 204-61] Pipelining loop 'readA_readA_i_readA_k'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 4, loop 'readA_readA_i_readA_k'
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.68 seconds. CPU system time: 0.07 seconds. Elapsed time: 0.81 seconds; current allocated memory: 327.608 MB.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.74 seconds. CPU system time: 0.08 seconds. Elapsed time: 0.84 seconds; current allocated memory: 347.054 MB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111] Finished Binding: CPU user time: 0.09 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.1 seconds; current allocated memory: 327.980 MB.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.18 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.21 seconds; current allocated memory: 347.594 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_readB_readB_inner' 
+INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_fill_localC_fill_localC_inner' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [SCHED 204-11] Starting scheduling ...
-INFO: [SCHED 204-61] Pipelining loop 'readB_readB_inner'.
-INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 4, loop 'readB_readB_inner'
+INFO: [SCHED 204-61] Pipelining loop 'fill_localC_fill_localC_inner'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'fill_localC_fill_localC_inner'
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.17 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.2 seconds; current allocated memory: 328.239 MB.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.39 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.43 seconds; current allocated memory: 347.995 MB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111] Finished Binding: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 328.572 MB.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.09 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.1 seconds; current allocated memory: 348.524 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_systolic1' 
+INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_readB_readB_j_readB_k' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [SCHED 204-11] Starting scheduling ...
-INFO: [SCHED 204-61] Pipelining loop 'systolic1'.
-INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 3, loop 'systolic1'
+INFO: [SCHED 204-61] Pipelining loop 'readB_readB_j_readB_k'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 4, loop 'readB_readB_j_readB_k'
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.35 seconds. CPU system time: 0.05 seconds. Elapsed time: 1.42 seconds; current allocated memory: 331.842 MB.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.35 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.38 seconds; current allocated memory: 348.967 MB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111] Finished Binding: CPU user time: 0.75 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.77 seconds; current allocated memory: 336.390 MB.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.14 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.17 seconds; current allocated memory: 349.527 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_systolick' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'systolick'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 3, loop 'systolick'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.4 seconds. CPU system time: 0.06 seconds. Elapsed time: 1.46 seconds; current allocated memory: 352.445 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.72 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.73 seconds; current allocated memory: 356.504 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_Accum_C' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Accum_C'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 2, loop 'Accum_C'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.35 seconds. CPU system time: 0.02 seconds. Elapsed time: 1.41 seconds; current allocated memory: 357.111 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.13 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.15 seconds; current allocated memory: 358.118 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-42] -- Implementing module 'krnl_mmult_Pipeline_writeC_writeC_inner' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
@@ -141,76 +192,88 @@ INFO: [SCHED 204-11] Starting scheduling ...
 INFO: [SCHED 204-61] Pipelining loop 'writeC_writeC_inner'.
 INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 72, loop 'writeC_writeC_inner'
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.78 seconds. CPU system time: 0.04 seconds. Elapsed time: 1.85 seconds; current allocated memory: 338.548 MB.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.63 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.68 seconds; current allocated memory: 358.629 MB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111] Finished Binding: CPU user time: 0.8 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.85 seconds; current allocated memory: 339.755 MB.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.52 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.56 seconds; current allocated memory: 359.294 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-42] -- Implementing module 'krnl_mmult' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [SCHED 204-11] Starting scheduling ...
 INFO: [SCHED 204-11] Finished scheduling.
-INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.22 seconds. CPU system time: 0.04 seconds. Elapsed time: 1.27 seconds; current allocated memory: 341.455 MB.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0.02 seconds. Elapsed time: 1.03 seconds; current allocated memory: 360.397 MB.
 INFO: [BIND 205-100] Starting micro-architecture generation ...
 INFO: [BIND 205-101] Performing variable lifetime analysis.
 INFO: [BIND 205-101] Exploring resource sharing.
 INFO: [BIND 205-101] Binding ...
 INFO: [BIND 205-100] Finished micro-architecture generation.
-INFO: [HLS 200-111] Finished Binding: CPU user time: 2.18 seconds. CPU system time: 0.02 seconds. Elapsed time: 2.21 seconds; current allocated memory: 344.842 MB.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2.16 seconds. CPU system time: 0.02 seconds. Elapsed time: 2.19 seconds; current allocated memory: 362.335 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_readA_readA_inner' 
+INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_readA_readA_i_readA_k' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_readA_readA_inner' pipeline 'readA_readA_inner' pipeline type 'loop pipeline'
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARVALID' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARADDR' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARID' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARLEN' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARSIZE' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARBURST' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARLOCK' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARCACHE' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARPROT' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARQOS' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARREGION' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_inner/m_axi_gmem_ARUSER' to 0.
-INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_readA_readA_inner'.
-INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2.15 seconds. CPU system time: 0.05 seconds. Elapsed time: 2.31 seconds; current allocated memory: 345.605 MB.
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_readA_readA_i_readA_k' pipeline 'readA_readA_i_readA_k' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readA_readA_i_readA_k/m_axi_gmem_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_readA_readA_i_readA_k'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2.19 seconds. CPU system time: 0.06 seconds. Elapsed time: 2.34 seconds; current allocated memory: 363.316 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_readB_readB_inner' 
+INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_fill_localC_fill_localC_inner' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_readB_readB_inner' pipeline 'readB_readB_inner' pipeline type 'loop pipeline'
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARVALID' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARADDR' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARID' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARLEN' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARSIZE' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARBURST' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARLOCK' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARCACHE' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARPROT' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARQOS' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARREGION' to 0.
-WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_inner/m_axi_gmem_ARUSER' to 0.
-INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_readB_readB_inner'.
-INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.27 seconds. CPU system time: 0.05 seconds. Elapsed time: 0.41 seconds; current allocated memory: 347.686 MB.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_fill_localC_fill_localC_inner'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.6 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.67 seconds; current allocated memory: 366.213 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_systolic1' 
+INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_readB_readB_j_readB_k' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
-INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_systolic1' pipeline 'systolic1' pipeline type 'loop pipeline'
-INFO: [RTGEN 206-104] Estimated max fanout for 'krnl_mmult_Pipeline_systolic1' is 7168 from HDL expression: ((1'b0 == ap_block_pp0_stage0) & (ap_enable_reg_pp0_iter1 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_readB_readB_j_readB_k' pipeline 'readB_readB_j_readB_k' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'krnl_mmult_Pipeline_readB_readB_j_readB_k/m_axi_gmem_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_readB_readB_j_readB_k'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.36 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.49 seconds; current allocated memory: 369.393 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_systolick' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_systolick' pipeline 'systolick' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-104] Estimated max fanout for 'krnl_mmult_Pipeline_systolick' is 6144 from HDL expression: ((1'b0 == ap_block_pp0_stage0) & (ap_enable_reg_pp0_iter1 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))
 INFO: [RTGEN 206-100] Generating core module 'mul_32s_32s_32_1_1': 64 instance(s).
-INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_systolic1'.
-INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.63 seconds. CPU system time: 0.05 seconds. Elapsed time: 0.72 seconds; current allocated memory: 355.513 MB.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_systolick'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.61 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.67 seconds; current allocated memory: 377.574 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_Accum_C' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_Accum_C' pipeline 'Accum_C' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mux_42_32_1_1': 16 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_Accum_C'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 4.81 seconds. CPU system time: 0.07 seconds. Elapsed time: 5.13 seconds; current allocated memory: 397.017 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult_Pipeline_writeC_writeC_inner' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'krnl_mmult_Pipeline_writeC_writeC_inner' pipeline 'writeC_writeC_inner' pipeline type 'loop pipeline'
-INFO: [RTGEN 206-100] Generating core module 'mux_647_32_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_165_32_1_1': 1 instance(s).
 INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult_Pipeline_writeC_writeC_inner'.
-INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 3.55 seconds. CPU system time: 0.06 seconds. Elapsed time: 3.67 seconds; current allocated memory: 378.089 MB.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.59 seconds. CPU system time: 0.06 seconds. Elapsed time: 0.84 seconds; current allocated memory: 402.538 MB.
 INFO: [HLS 200-10] ----------------------------------------------------------------
 INFO: [HLS 200-10] -- Generating RTL for module 'krnl_mmult' 
 INFO: [HLS 200-10] ----------------------------------------------------------------
@@ -223,18 +286,17 @@ INFO: [RTGEN 206-500] Setting interface mode on port 'krnl_mmult/a_row' to 's_ax
 INFO: [RTGEN 206-500] Setting interface mode on port 'krnl_mmult/a_col' to 's_axilite & ap_none'.
 INFO: [RTGEN 206-500] Setting interface mode on port 'krnl_mmult/b_col' to 's_axilite & ap_none'.
 INFO: [RTGEN 206-500] Setting interface mode on function 'krnl_mmult' to 's_axilite & ap_ctrl_chain'.
-INFO: [RTGEN 206-100] Bundling port 'a', 'b', 'c', 'a_row', 'a_col', 'b_col' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Bundling port 'a', 'b', 'c', 'a_row', 'a_col', 'b_col' and 'return' to AXI-Lite port control.
 INFO: [RTGEN 206-100] Generating core module 'mul_64ns_64ns_128_1_1': 1 instance(s).
-INFO: [RTGEN 206-100] Generating core module 'mux_83_32_1_1': 64 instance(s).
 INFO: [RTGEN 206-100] Finished creating RTL model for 'krnl_mmult'.
-INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.85 seconds. CPU system time: 0.05 seconds. Elapsed time: 0.97 seconds; current allocated memory: 390.595 MB.
-INFO: [RTMG 210-278] Implementing memory 'krnl_mmult_localA_0_ram (RAM)' using auto RAMs.
-INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 4.38 seconds. CPU system time: 0.11 seconds. Elapsed time: 4.51 seconds; current allocated memory: 405.422 MB.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.65 seconds. CPU system time: 0.06 seconds. Elapsed time: 0.79 seconds; current allocated memory: 411.776 MB.
+INFO: [RTMG 210-278] Implementing memory 'krnl_mmult_localA_0_0_ram (RAM)' using auto RAMs.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 3.94 seconds. CPU system time: 0.12 seconds. Elapsed time: 4.08 seconds; current allocated memory: 421.743 MB.
 INFO: [HLS 200-1603] Design has MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
-INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1.57 seconds. CPU system time: 0.05 seconds. Elapsed time: 1.64 seconds; current allocated memory: 416.816 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.95 seconds. CPU system time: 0.04 seconds. Elapsed time: 0.99 seconds; current allocated memory: 433.341 MB.
 INFO: [VHDL 208-304] Generating VHDL RTL for krnl_mmult.
 INFO: [VLOG 209-307] Generating Verilog RTL for krnl_mmult.
 INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
 INFO: [HLS 200-789] **** Estimated Fmax: 136.99 MHz
-INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 33.35 seconds. CPU system time: 2.48 seconds. Elapsed time: 36.86 seconds; current allocated memory: 416.800 MB.
-INFO: [HLS 200-112] Total CPU user time: 40.22 seconds. Total CPU system time: 4.81 seconds. Total elapsed time: 44.3 seconds; peak allocated memory: 416.816 MB.
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 36.22 seconds. CPU system time: 2.8 seconds. Elapsed time: 40.44 seconds; current allocated memory: 433.326 MB.
+INFO: [HLS 200-112] Total CPU user time: 43.49 seconds. Total CPU system time: 5.4 seconds. Total elapsed time: 47.75 seconds; peak allocated memory: 433.341 MB.

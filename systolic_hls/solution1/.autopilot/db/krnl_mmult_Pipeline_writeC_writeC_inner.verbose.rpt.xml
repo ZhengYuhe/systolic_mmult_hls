@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'krnl_mmult_Pipeline_writeC_writeC_inner'" level="0">
-<item name = "Date">Mon Dec  4 19:45:26 2023
+<item name = "Date">Tue Dec  5 21:22:07 2023
 </item>
 <item name = "Version">2021.1 (Build 3247384 on Thu Jun 10 19:36:07 MDT 2021)</item>
 <item name = "Project">systolic_hls</item>
@@ -50,19 +50,19 @@
 <column name="DSP">-, -, -, -, -</column>
 <column name="Expression">-, -, 0, 3323, -</column>
 <column name="FIFO">-, -, -, -, -</column>
-<column name="Instance">-, -, 0, 273, -</column>
+<column name="Instance">-, -, 0, 65, -</column>
 <column name="Memory">-, -, -, -, -</column>
 <column name="Multiplexer">-, -, -, 99, -</column>
-<column name="Register">-, -, 1247, -, -</column>
+<column name="Register">-, -, 1218, -, -</column>
 <specialColumn name="Available">432, 360, 141120, 70560, 0</specialColumn>
-<specialColumn name="Utilization (%)">0, 0, ~0, 5, 0</specialColumn>
+<specialColumn name="Utilization (%)">0, 0, ~0, 4, 0</specialColumn>
 </table>
 </item>
 <item name = "Detail">
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="1">
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
-<column name="mux_647_32_1_1_U234">mux_647_32_1_1, 0, 0, 0, 273, 0</column>
+<column name="mux_165_32_1_1_U347">mux_165_32_1_1, 0, 0, 0, 65, 0</column>
 </table>
 </item>
 <item name = "DSP"><table name="" hasTotal="0">
@@ -79,28 +79,28 @@
 </item>
 <item name = "Expression"><table name="" hasTotal="1">
 <keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
-<column name="add_ln265_1_fu_832_p2">+, 0, 0, 71, 64, 1</column>
-<column name="add_ln265_2_fu_850_p2">+, 0, 0, 71, 64, 1</column>
-<column name="add_ln265_fu_797_p2">+, 0, 0, 135, 128, 1</column>
-<column name="add_ln267_1_fu_1070_p2">+, 0, 0, 71, 64, 1</column>
-<column name="add_ln267_fu_1064_p2">+, 0, 0, 71, 64, 1</column>
-<column name="add_ln268_1_fu_1032_p2">+, 0, 0, 13, 64, 64</column>
-<column name="add_ln268_2_fu_1048_p2">+, 0, 0, 13, 6, 6</column>
-<column name="add_ln268_3_fu_1043_p2">+, 0, 0, 13, 6, 6</column>
-<column name="add_ln268_fu_1037_p2">+, 0, 0, 13, 64, 64</column>
-<column name="tmp_fu_768_p2">+, 0, 0, 69, 62, 62</column>
-<column name="tmp_mid1_fu_868_p2">+, 0, 0, 69, 62, 62</column>
+<column name="add_ln328_1_fu_612_p2">+, 0, 0, 71, 64, 1</column>
+<column name="add_ln328_2_fu_445_p2">+, 0, 0, 71, 64, 1</column>
+<column name="add_ln328_fu_413_p2">+, 0, 0, 135, 128, 1</column>
+<column name="add_ln330_1_fu_583_p2">+, 0, 0, 71, 64, 1</column>
+<column name="add_ln330_fu_577_p2">+, 0, 0, 71, 64, 1</column>
+<column name="add_ln331_1_fu_545_p2">+, 0, 0, 13, 64, 64</column>
+<column name="add_ln331_2_fu_561_p2">+, 0, 0, 13, 6, 6</column>
+<column name="add_ln331_3_fu_556_p2">+, 0, 0, 13, 6, 6</column>
+<column name="add_ln331_fu_550_p2">+, 0, 0, 13, 64, 64</column>
+<column name="tmp_fu_384_p2">+, 0, 0, 69, 62, 62</column>
+<column name="tmp_mid1_fu_463_p2">+, 0, 0, 69, 62, 62</column>
 <column name="ap_block_pp0_stage0_01001">and, 0, 0, 2, 1, 1</column>
-<column name="icmp_ln265_fu_792_p2">icmp, 0, 0, 50, 128, 128</column>
-<column name="icmp_ln267_fu_812_p2">icmp, 0, 0, 29, 64, 64</column>
+<column name="icmp_ln328_fu_408_p2">icmp, 0, 0, 50, 128, 128</column>
+<column name="icmp_ln330_fu_425_p2">icmp, 0, 0, 29, 64, 64</column>
 <column name="ap_block_pp0_stage0_11001">or, 0, 0, 2, 1, 1</column>
-<column name="select_ln265_1_fu_825_p3">select, 0, 0, 56, 1, 64</column>
-<column name="select_ln265_2_fu_838_p3">select, 0, 0, 56, 1, 64</column>
-<column name="select_ln265_3_fu_892_p3">select, 0, 0, 55, 1, 62</column>
-<column name="select_ln265_4_fu_920_p3">select, 0, 0, 56, 1, 64</column>
-<column name="select_ln265_fu_817_p3">select, 0, 0, 56, 1, 64</column>
-<column name="shl_ln268_1_fu_1124_p2">shl, 0, 0, 2171, 512, 512</column>
-<column name="shl_ln268_fu_1107_p2">shl, 0, 0, 179, 4, 64</column>
+<column name="select_ln328_1_fu_438_p3">select, 0, 0, 56, 1, 64</column>
+<column name="select_ln328_2_fu_618_p3">select, 0, 0, 56, 1, 64</column>
+<column name="select_ln328_3_fu_487_p3">select, 0, 0, 55, 1, 62</column>
+<column name="select_ln328_4_fu_515_p3">select, 0, 0, 56, 1, 64</column>
+<column name="select_ln328_fu_430_p3">select, 0, 0, 56, 1, 64</column>
+<column name="shl_ln331_1_fu_686_p2">shl, 0, 0, 2171, 512, 512</column>
+<column name="shl_ln331_fu_669_p2">shl, 0, 0, 179, 4, 64</column>
 <column name="ap_enable_pp0">xor, 0, 0, 2, 1, 2</column>
 </table>
 </item>
@@ -112,16 +112,16 @@
 <column name="gmem_blk_n_AW">9, 2, 1, 2</column>
 <column name="gmem_blk_n_B">9, 2, 1, 2</column>
 <column name="gmem_blk_n_W">9, 2, 1, 2</column>
-<column name="i_fu_250">9, 2, 64, 128</column>
-<column name="indvar123_fu_254">9, 2, 64, 128</column>
-<column name="indvar126_fu_246">9, 2, 64, 128</column>
-<column name="indvar_flatten72_fu_258">9, 2, 128, 256</column>
-<column name="j_fu_242">9, 2, 64, 128</column>
+<column name="i_fu_154">9, 2, 64, 128</column>
+<column name="indvar181_fu_158">9, 2, 64, 128</column>
+<column name="indvar184_fu_150">9, 2, 64, 128</column>
+<column name="indvar_flatten109_fu_162">9, 2, 128, 256</column>
+<column name="j_fu_146">9, 2, 64, 128</column>
 </table>
 </item>
 <item name = "Register"><table name="" hasTotal="1">
 <keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
-<column name="add_ln268_2_reg_1541">6, 0, 6, 0</column>
+<column name="add_ln331_2_reg_873">6, 0, 6, 0</column>
 <column name="ap_CS_fsm">1, 0, 1, 0</column>
 <column name="ap_done_reg">1, 0, 1, 0</column>
 <column name="ap_enable_reg_pp0_iter1">1, 0, 1, 0</column>
@@ -264,18 +264,19 @@
 <column name="ap_loop_exit_ready_pp0_iter7_reg">1, 0, 1, 0</column>
 <column name="ap_loop_exit_ready_pp0_iter8_reg">1, 0, 1, 0</column>
 <column name="ap_loop_exit_ready_pp0_iter9_reg">1, 0, 1, 0</column>
-<column name="i_fu_250">64, 0, 64, 0</column>
-<column name="indvar123_fu_254">64, 0, 64, 0</column>
-<column name="indvar126_fu_246">64, 0, 64, 0</column>
-<column name="indvar_flatten72_fu_258">128, 0, 128, 0</column>
-<column name="j_fu_242">64, 0, 64, 0</column>
-<column name="shl_ln268_1_reg_1557">512, 0, 512, 0</column>
-<column name="shl_ln268_reg_1552">64, 0, 64, 0</column>
-<column name="tmp_4_reg_1536">32, 0, 32, 0</column>
-<column name="trunc_ln6_reg_1547">58, 0, 58, 0</column>
-<column name="zext_ln212_1_cast_reg_1527">12, 0, 64, 52</column>
-<column name="zext_ln212_2_cast_reg_1516">13, 0, 64, 51</column>
-<column name="zext_ln212_cast_reg_1521">24, 0, 62, 38</column>
+<column name="empty_35_reg_868">2, 0, 2, 0</column>
+<column name="i_fu_154">64, 0, 64, 0</column>
+<column name="icmp_ln330_reg_863">1, 0, 1, 0</column>
+<column name="indvar181_fu_158">64, 0, 64, 0</column>
+<column name="indvar184_fu_150">64, 0, 64, 0</column>
+<column name="indvar_flatten109_fu_162">128, 0, 128, 0</column>
+<column name="j_fu_146">64, 0, 64, 0</column>
+<column name="shl_ln331_1_reg_889">512, 0, 512, 0</column>
+<column name="shl_ln331_reg_884">64, 0, 64, 0</column>
+<column name="trunc_ln6_reg_879">58, 0, 58, 0</column>
+<column name="zext_ln226_1_cast_reg_854">12, 0, 64, 52</column>
+<column name="zext_ln226_cast_reg_848">24, 0, 62, 38</column>
+<column name="zext_ln265_cast_reg_843">13, 0, 64, 51</column>
 </table>
 </item>
 </section>
@@ -336,76 +337,28 @@
 <column name="m_axi_gmem_BRESP">in, 2, m_axi, gmem, pointer</column>
 <column name="m_axi_gmem_BID">in, 1, m_axi, gmem, pointer</column>
 <column name="m_axi_gmem_BUSER">in, 1, m_axi, gmem, pointer</column>
-<column name="zext_ln265">in, 12, ap_none, zext_ln265, scalar</column>
-<column name="zext_ln212_1">in, 12, ap_none, zext_ln212_1, scalar</column>
-<column name="zext_ln212">in, 24, ap_none, zext_ln212, scalar</column>
-<column name="tmp_10">in, 9, ap_none, tmp_10, scalar</column>
-<column name="bound66">in, 128, ap_none, bound66, scalar</column>
-<column name="zext_ln212_2">in, 13, ap_none, zext_ln212_2, scalar</column>
+<column name="zext_ln202">in, 12, ap_none, zext_ln202, scalar</column>
+<column name="zext_ln226_1">in, 12, ap_none, zext_ln226_1, scalar</column>
+<column name="zext_ln226">in, 24, ap_none, zext_ln226, scalar</column>
+<column name="tmp_24">in, 10, ap_none, tmp_24, scalar</column>
+<column name="mul_ln238">in, 128, ap_none, mul_ln238, scalar</column>
+<column name="zext_ln265">in, 13, ap_none, zext_ln265, scalar</column>
 <column name="localC_0_0_4_reload">in, 32, ap_none, localC_0_0_4_reload, scalar</column>
 <column name="localC_0_1_4_reload">in, 32, ap_none, localC_0_1_4_reload, scalar</column>
 <column name="localC_0_2_4_reload">in, 32, ap_none, localC_0_2_4_reload, scalar</column>
 <column name="localC_0_3_4_reload">in, 32, ap_none, localC_0_3_4_reload, scalar</column>
-<column name="localC_0_4_4_reload">in, 32, ap_none, localC_0_4_4_reload, scalar</column>
-<column name="localC_0_5_4_reload">in, 32, ap_none, localC_0_5_4_reload, scalar</column>
-<column name="localC_0_6_4_reload">in, 32, ap_none, localC_0_6_4_reload, scalar</column>
-<column name="localC_0_7_4_reload">in, 32, ap_none, localC_0_7_4_reload, scalar</column>
-<column name="localC_1_0_2_reload">in, 32, ap_none, localC_1_0_2_reload, scalar</column>
-<column name="localC_1_1_2_reload">in, 32, ap_none, localC_1_1_2_reload, scalar</column>
-<column name="localC_1_2_2_reload">in, 32, ap_none, localC_1_2_2_reload, scalar</column>
-<column name="localC_1_3_2_reload">in, 32, ap_none, localC_1_3_2_reload, scalar</column>
-<column name="localC_1_4_2_reload">in, 32, ap_none, localC_1_4_2_reload, scalar</column>
-<column name="localC_1_5_2_reload">in, 32, ap_none, localC_1_5_2_reload, scalar</column>
-<column name="localC_1_6_2_reload">in, 32, ap_none, localC_1_6_2_reload, scalar</column>
-<column name="localC_1_7_2_reload">in, 32, ap_none, localC_1_7_2_reload, scalar</column>
-<column name="localC_2_0_2_reload">in, 32, ap_none, localC_2_0_2_reload, scalar</column>
-<column name="localC_2_1_2_reload">in, 32, ap_none, localC_2_1_2_reload, scalar</column>
-<column name="localC_2_2_2_reload">in, 32, ap_none, localC_2_2_2_reload, scalar</column>
-<column name="localC_2_3_2_reload">in, 32, ap_none, localC_2_3_2_reload, scalar</column>
-<column name="localC_2_4_2_reload">in, 32, ap_none, localC_2_4_2_reload, scalar</column>
-<column name="localC_2_5_2_reload">in, 32, ap_none, localC_2_5_2_reload, scalar</column>
-<column name="localC_2_6_2_reload">in, 32, ap_none, localC_2_6_2_reload, scalar</column>
-<column name="localC_2_7_2_reload">in, 32, ap_none, localC_2_7_2_reload, scalar</column>
-<column name="localC_3_0_2_reload">in, 32, ap_none, localC_3_0_2_reload, scalar</column>
-<column name="localC_3_1_2_reload">in, 32, ap_none, localC_3_1_2_reload, scalar</column>
-<column name="localC_3_2_2_reload">in, 32, ap_none, localC_3_2_2_reload, scalar</column>
-<column name="localC_3_3_2_reload">in, 32, ap_none, localC_3_3_2_reload, scalar</column>
-<column name="localC_3_4_2_reload">in, 32, ap_none, localC_3_4_2_reload, scalar</column>
-<column name="localC_3_5_2_reload">in, 32, ap_none, localC_3_5_2_reload, scalar</column>
-<column name="localC_3_6_2_reload">in, 32, ap_none, localC_3_6_2_reload, scalar</column>
-<column name="localC_3_7_2_reload">in, 32, ap_none, localC_3_7_2_reload, scalar</column>
-<column name="localC_4_0_2_reload">in, 32, ap_none, localC_4_0_2_reload, scalar</column>
-<column name="localC_4_1_2_reload">in, 32, ap_none, localC_4_1_2_reload, scalar</column>
-<column name="localC_4_2_2_reload">in, 32, ap_none, localC_4_2_2_reload, scalar</column>
-<column name="localC_4_3_2_reload">in, 32, ap_none, localC_4_3_2_reload, scalar</column>
-<column name="localC_4_4_2_reload">in, 32, ap_none, localC_4_4_2_reload, scalar</column>
-<column name="localC_4_5_2_reload">in, 32, ap_none, localC_4_5_2_reload, scalar</column>
-<column name="localC_4_6_2_reload">in, 32, ap_none, localC_4_6_2_reload, scalar</column>
-<column name="localC_4_7_2_reload">in, 32, ap_none, localC_4_7_2_reload, scalar</column>
-<column name="localC_5_0_2_reload">in, 32, ap_none, localC_5_0_2_reload, scalar</column>
-<column name="localC_5_1_2_reload">in, 32, ap_none, localC_5_1_2_reload, scalar</column>
-<column name="localC_5_2_2_reload">in, 32, ap_none, localC_5_2_2_reload, scalar</column>
-<column name="localC_5_3_2_reload">in, 32, ap_none, localC_5_3_2_reload, scalar</column>
-<column name="localC_5_4_2_reload">in, 32, ap_none, localC_5_4_2_reload, scalar</column>
-<column name="localC_5_5_2_reload">in, 32, ap_none, localC_5_5_2_reload, scalar</column>
-<column name="localC_5_6_2_reload">in, 32, ap_none, localC_5_6_2_reload, scalar</column>
-<column name="localC_5_7_2_reload">in, 32, ap_none, localC_5_7_2_reload, scalar</column>
-<column name="localC_6_0_2_reload">in, 32, ap_none, localC_6_0_2_reload, scalar</column>
-<column name="localC_6_1_2_reload">in, 32, ap_none, localC_6_1_2_reload, scalar</column>
-<column name="localC_6_2_2_reload">in, 32, ap_none, localC_6_2_2_reload, scalar</column>
-<column name="localC_6_3_2_reload">in, 32, ap_none, localC_6_3_2_reload, scalar</column>
-<column name="localC_6_4_2_reload">in, 32, ap_none, localC_6_4_2_reload, scalar</column>
-<column name="localC_6_5_2_reload">in, 32, ap_none, localC_6_5_2_reload, scalar</column>
-<column name="localC_6_6_2_reload">in, 32, ap_none, localC_6_6_2_reload, scalar</column>
-<column name="localC_6_7_2_reload">in, 32, ap_none, localC_6_7_2_reload, scalar</column>
-<column name="localC_7_0_2_reload">in, 32, ap_none, localC_7_0_2_reload, scalar</column>
-<column name="localC_7_1_2_reload">in, 32, ap_none, localC_7_1_2_reload, scalar</column>
-<column name="localC_7_2_2_reload">in, 32, ap_none, localC_7_2_2_reload, scalar</column>
-<column name="localC_7_3_2_reload">in, 32, ap_none, localC_7_3_2_reload, scalar</column>
-<column name="localC_7_4_2_reload">in, 32, ap_none, localC_7_4_2_reload, scalar</column>
-<column name="localC_7_5_2_reload">in, 32, ap_none, localC_7_5_2_reload, scalar</column>
-<column name="localC_7_6_2_reload">in, 32, ap_none, localC_7_6_2_reload, scalar</column>
-<column name="localC_7_7_2_reload">in, 32, ap_none, localC_7_7_2_reload, scalar</column>
+<column name="localC_1_0_4_reload">in, 32, ap_none, localC_1_0_4_reload, scalar</column>
+<column name="localC_1_1_4_reload">in, 32, ap_none, localC_1_1_4_reload, scalar</column>
+<column name="localC_1_2_4_reload">in, 32, ap_none, localC_1_2_4_reload, scalar</column>
+<column name="localC_1_3_4_reload">in, 32, ap_none, localC_1_3_4_reload, scalar</column>
+<column name="localC_2_0_4_reload">in, 32, ap_none, localC_2_0_4_reload, scalar</column>
+<column name="localC_2_1_4_reload">in, 32, ap_none, localC_2_1_4_reload, scalar</column>
+<column name="localC_2_2_4_reload">in, 32, ap_none, localC_2_2_4_reload, scalar</column>
+<column name="localC_2_3_4_reload">in, 32, ap_none, localC_2_3_4_reload, scalar</column>
+<column name="localC_3_0_4_reload">in, 32, ap_none, localC_3_0_4_reload, scalar</column>
+<column name="localC_3_1_4_reload">in, 32, ap_none, localC_3_1_4_reload, scalar</column>
+<column name="localC_3_2_4_reload">in, 32, ap_none, localC_3_2_4_reload, scalar</column>
+<column name="localC_3_3_4_reload">in, 32, ap_none, localC_3_3_4_reload, scalar</column>
 <column name="c">in, 64, ap_none, c, scalar</column>
 <column name="c_cast">in, 6, ap_none, c_cast, scalar</column>
 </table>

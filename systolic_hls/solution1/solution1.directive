@@ -5,6 +5,11 @@
                 <option name="name" value="krnl_mmult"/>
             </pragma>
         </directive>
+        <directive functionName="krnl_mmult" label="" functionLabel="">
+            <pragma name="TOP">
+                <option name="name" value="krnl_mmult"/>
+            </pragma>
+        </directive>
     </sourceFile>
 </AutoPilot:ProjectResources>
 

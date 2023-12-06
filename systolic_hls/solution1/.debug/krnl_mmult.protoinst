@@ -14,7 +14,7 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"grp_krnl_mmult_Pipeline_readA_readA_inner_fu_1519/grp_krnl_mmult_Pipeline_readA_readA_inner_fu_1519_activity": {
+				"grp_krnl_mmult_Pipeline_Accum_C_fu_990/grp_krnl_mmult_Pipeline_Accum_C_fu_990_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
@@ -24,7 +24,7 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"grp_krnl_mmult_Pipeline_readB_readB_inner_fu_1536/grp_krnl_mmult_Pipeline_readB_readB_inner_fu_1536_activity": {
+				"grp_krnl_mmult_Pipeline_fill_localC_fill_localC_inner_fu_829/grp_krnl_mmult_Pipeline_fill_localC_fill_localC_inner_fu_829_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
@@ -34,7 +34,7 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"grp_krnl_mmult_Pipeline_systolic1_fu_1553/grp_krnl_mmult_Pipeline_systolic1_fu_1553_activity": {
+				"grp_krnl_mmult_Pipeline_readA_readA_i_readA_k_fu_804/grp_krnl_mmult_Pipeline_readA_readA_i_readA_k_fu_804_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},
@@ -44,7 +44,27 @@
 						"AP_START": { "actual": "ap_start"}
 					}
 				},
-				"grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1765/grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1765_activity": {
+				"grp_krnl_mmult_Pipeline_readB_readB_j_readB_k_fu_865/grp_krnl_mmult_Pipeline_readB_readB_j_readB_k_fu_865_activity": {
+					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
+					"ports": {
+						"AP_CLK": { "actual": "ap_clk"},
+						"AP_DONE": { "actual": "ap_done"},
+						"AP_READY": { "actual": "ap_ready"},
+						"AP_RESET": { "actual": "ap_rst"},
+						"AP_START": { "actual": "ap_start"}
+					}
+				},
+				"grp_krnl_mmult_Pipeline_systolick_fu_890/grp_krnl_mmult_Pipeline_systolick_fu_890_activity": {
+					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
+					"ports": {
+						"AP_CLK": { "actual": "ap_clk"},
+						"AP_DONE": { "actual": "ap_done"},
+						"AP_READY": { "actual": "ap_ready"},
+						"AP_RESET": { "actual": "ap_rst"},
+						"AP_START": { "actual": "ap_start"}
+					}
+				},
+				"grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1090/grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1090_activity": {
 					"interface": "xilinx.com:interface:internal_hls_dataflow:1.0",
 					"ports": {
 						"AP_CLK": { "actual": "ap_clk"},

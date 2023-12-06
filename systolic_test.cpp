@@ -87,6 +87,29 @@ int main() {
         }
     }
 
+
+    // std::cout << "printing sw gold" << std::endl;
+    // for (int i = 0; i < DATA_SIZE; i++){
+    //     for (int j = 0; j < DATA_SIZE; j ++ ){
+    //         std::cout << source_sw_results[i * DATA_SIZE + j] << "  ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+
+    // std::cout << std::endl;
+    // std::cout << std::endl;
+
+    // std::cout << "printing hw result" << std::endl;
+    // for (int i = 0; i < DATA_SIZE; i++){
+    //     for (int j = 0; j < DATA_SIZE; j ++ ){
+    //         std::cout << source_hw_results[i * DATA_SIZE + j]  << "  ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+
+
+
+
     delete[] source_in1;
     delete[] source_in2;
     delete[] source_hw_results;

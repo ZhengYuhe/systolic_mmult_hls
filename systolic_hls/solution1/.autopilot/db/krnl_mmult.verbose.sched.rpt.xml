@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'krnl_mmult'" level="0">
-<item name = "Date">Mon Dec  4 19:45:16 2023
+<item name = "Date">Tue Dec  5 21:21:54 2023
 </item>
 <item name = "Version">2021.1 (Build 3247384 on Thu Jun 10 19:36:07 MDT 2021)</item>
 <item name = "Project">systolic_hls</item>
@@ -35,16 +35,8 @@
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- outer_i">?, ?, ?, -, -, 512, no</column>
-<column name=" + outer_j">?, ?, ?, -, -, 512, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
-<column name="  ++ fill_C_inner">?, ?, 1, -, -, ?, no</column>
+<column name="- outer_i">?, ?, ?, -, -, 1024, no</column>
+<column name=" + outer_j">?, ?, ?, -, -, 1024, no</column>
 </table>
 </item>
 </section>

@@ -151,7 +151,10 @@
       "config_interface -default_interface=kernel",
       "config_rtl -register_reset_num=3"
     ],
-    "DirectiveTcl": ["set_directive_top krnl_mmult -name krnl_mmult"],
+    "DirectiveTcl": [
+      "set_directive_top krnl_mmult -name krnl_mmult",
+      "set_directive_top krnl_mmult -name krnl_mmult"
+    ],
     "ProfileOption": "0",
     "ProfileType": "none",
     "KernelName": "krnl_mmult"
@@ -183,12 +186,19 @@
       "impl\/vhdl\/krnl_mmult_control_s_axi.vhd",
       "impl\/vhdl\/krnl_mmult_flow_control_loop_pipe_sequential_init.vhd",
       "impl\/vhdl\/krnl_mmult_gmem_m_axi.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_Accum_C.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_fill_localC_fill_localC_inner.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readA_inner.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readA_readA_i.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readA_readA_i_readA_k.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readA_readA_inner.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readB_inner.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readB_readB_inner.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readB_readB_j.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readB_readB_j_readB_k.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_readB_VITIS_LOOP_222_3.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_systolic1.vhd",
+      "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_systolick.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_VITIS_LOOP_213_2.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_writeC_inner.vhd",
       "impl\/vhdl\/krnl_mmult_krnl_mmult_Pipeline_writeC_writeC_inner.vhd",
@@ -199,6 +209,7 @@
       "impl\/vhdl\/krnl_mmult_mul_64ns_64ns_128_1_1.vhd",
       "impl\/vhdl\/krnl_mmult_mux_42_32_1_1.vhd",
       "impl\/vhdl\/krnl_mmult_mux_83_32_1_1.vhd",
+      "impl\/vhdl\/krnl_mmult_mux_165_32_1_1.vhd",
       "impl\/vhdl\/krnl_mmult_mux_647_32_1_1.vhd",
       "impl\/vhdl\/krnl_mmult.vhd"
     ],
@@ -206,12 +217,19 @@
       "impl\/verilog\/krnl_mmult_control_s_axi.v",
       "impl\/verilog\/krnl_mmult_flow_control_loop_pipe_sequential_init.v",
       "impl\/verilog\/krnl_mmult_gmem_m_axi.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_Accum_C.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_fill_localC_fill_localC_inner.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readA_inner.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readA_readA_i.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readA_readA_i_readA_k.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readA_readA_inner.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readB_inner.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readB_readB_inner.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readB_readB_j.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readB_readB_j_readB_k.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_readB_VITIS_LOOP_222_3.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_systolic1.v",
+      "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_systolick.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_VITIS_LOOP_213_2.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_writeC_inner.v",
       "impl\/verilog\/krnl_mmult_krnl_mmult_Pipeline_writeC_writeC_inner.v",
@@ -222,6 +240,7 @@
       "impl\/verilog\/krnl_mmult_mul_64ns_64ns_128_1_1.v",
       "impl\/verilog\/krnl_mmult_mux_42_32_1_1.v",
       "impl\/verilog\/krnl_mmult_mux_83_32_1_1.v",
+      "impl\/verilog\/krnl_mmult_mux_165_32_1_1.v",
       "impl\/verilog\/krnl_mmult_mux_647_32_1_1.v",
       "impl\/verilog\/krnl_mmult.v"
     ],
@@ -1051,39 +1070,61 @@
       "ModuleName": "krnl_mmult",
       "Instances": [
         {
-          "ModuleName": "krnl_mmult_Pipeline_readA_readA_inner",
-          "InstanceName": "grp_krnl_mmult_Pipeline_readA_readA_inner_fu_1519"
+          "ModuleName": "krnl_mmult_Pipeline_readA_readA_i_readA_k",
+          "InstanceName": "grp_krnl_mmult_Pipeline_readA_readA_i_readA_k_fu_804"
         },
         {
-          "ModuleName": "krnl_mmult_Pipeline_readB_readB_inner",
-          "InstanceName": "grp_krnl_mmult_Pipeline_readB_readB_inner_fu_1536"
+          "ModuleName": "krnl_mmult_Pipeline_fill_localC_fill_localC_inner",
+          "InstanceName": "grp_krnl_mmult_Pipeline_fill_localC_fill_localC_inner_fu_829"
         },
         {
-          "ModuleName": "krnl_mmult_Pipeline_systolic1",
-          "InstanceName": "grp_krnl_mmult_Pipeline_systolic1_fu_1553"
+          "ModuleName": "krnl_mmult_Pipeline_readB_readB_j_readB_k",
+          "InstanceName": "grp_krnl_mmult_Pipeline_readB_readB_j_readB_k_fu_865"
+        },
+        {
+          "ModuleName": "krnl_mmult_Pipeline_systolick",
+          "InstanceName": "grp_krnl_mmult_Pipeline_systolick_fu_890"
+        },
+        {
+          "ModuleName": "krnl_mmult_Pipeline_Accum_C",
+          "InstanceName": "grp_krnl_mmult_Pipeline_Accum_C_fu_990"
         },
         {
           "ModuleName": "krnl_mmult_Pipeline_writeC_writeC_inner",
-          "InstanceName": "grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1765"
+          "InstanceName": "grp_krnl_mmult_Pipeline_writeC_writeC_inner_fu_1090"
         }
       ]
     },
     "Info": {
-      "krnl_mmult_Pipeline_readA_readA_inner": {
+      "krnl_mmult_Pipeline_readA_readA_i_readA_k": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "1",
         "isCombinational": "0",
         "isOneStateSeq": "0"
       },
-      "krnl_mmult_Pipeline_readB_readB_inner": {
+      "krnl_mmult_Pipeline_fill_localC_fill_localC_inner": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "1",
         "isCombinational": "0",
         "isOneStateSeq": "0"
       },
-      "krnl_mmult_Pipeline_systolic1": {
+      "krnl_mmult_Pipeline_readB_readB_j_readB_k": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "krnl_mmult_Pipeline_systolick": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "krnl_mmult_Pipeline_Accum_C": {
         "FunctionProtocol": "ap_ctrl_hs",
         "isTaskLevelControl": "0",
         "isPipelined": "1",
@@ -1106,7 +1147,7 @@
       }
     },
     "Metrics": {
-      "krnl_mmult_Pipeline_readA_readA_inner": {
+      "krnl_mmult_Pipeline_readA_readA_i_readA_k": {
         "Latency": {
           "LatencyBest": "",
           "LatencyAvg": "",
@@ -1121,17 +1162,17 @@
           "Estimate": "7.300"
         },
         "Loops": [{
-            "Name": "readA_readA_inner",
+            "Name": "readA_readA_i_readA_k",
             "TripCount": "",
             "Latency": "",
             "PipelineII": "1",
             "PipelineDepth": "3"
           }],
         "Area": {
-          "FF": "1183",
+          "FF": "1202",
           "AVAIL_FF": "141120",
           "UTIL_FF": "~0",
-          "LUT": "867",
+          "LUT": "953",
           "AVAIL_LUT": "70560",
           "UTIL_LUT": "1",
           "BRAM_18K": "0",
@@ -1145,7 +1186,46 @@
           "UTIL_URAM": "0"
         }
       },
-      "krnl_mmult_Pipeline_readB_readB_inner": {
+      "krnl_mmult_Pipeline_fill_localC_fill_localC_inner": {
+        "Latency": {
+          "LatencyBest": "18",
+          "LatencyAvg": "18",
+          "LatencyWorst": "18",
+          "PipelineII": "18",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "2.208"
+        },
+        "Loops": [{
+            "Name": "fill_localC_fill_localC_inner",
+            "TripCount": "16",
+            "Latency": "16",
+            "PipelineII": "1",
+            "PipelineDepth": "1"
+          }],
+        "Area": {
+          "FF": "525",
+          "AVAIL_FF": "141120",
+          "UTIL_FF": "~0",
+          "LUT": "296",
+          "AVAIL_LUT": "70560",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "432",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "360",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "krnl_mmult_Pipeline_readB_readB_j_readB_k": {
         "Latency": {
           "LatencyBest": "",
           "LatencyAvg": "",
@@ -1160,17 +1240,17 @@
           "Estimate": "7.300"
         },
         "Loops": [{
-            "Name": "readB_readB_inner",
+            "Name": "readB_readB_j_readB_k",
             "TripCount": "",
             "Latency": "",
             "PipelineII": "1",
             "PipelineDepth": "3"
           }],
         "Area": {
-          "FF": "1183",
+          "FF": "1202",
           "AVAIL_FF": "141120",
           "UTIL_FF": "~0",
-          "LUT": "867",
+          "LUT": "953",
           "AVAIL_LUT": "70560",
           "UTIL_LUT": "1",
           "BRAM_18K": "0",
@@ -1184,12 +1264,12 @@
           "UTIL_URAM": "0"
         }
       },
-      "krnl_mmult_Pipeline_systolic1": {
+      "krnl_mmult_Pipeline_systolick": {
         "Latency": {
-          "LatencyBest": "4114",
-          "LatencyAvg": "4114",
-          "LatencyWorst": "4114",
-          "PipelineII": "4114",
+          "LatencyBest": "1034",
+          "LatencyAvg": "1034",
+          "LatencyWorst": "1034",
+          "PipelineII": "1034",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
@@ -1199,9 +1279,9 @@
           "Estimate": "6.097"
         },
         "Loops": [{
-            "Name": "systolic1",
-            "TripCount": "4111",
-            "Latency": "4112",
+            "Name": "systolick",
+            "TripCount": "1031",
+            "Latency": "1032",
             "PipelineII": "1",
             "PipelineDepth": "3"
           }],
@@ -1209,15 +1289,54 @@
           "DSP": "192",
           "AVAIL_DSP": "360",
           "UTIL_DSP": "53",
-          "FF": "6155",
+          "FF": "6044",
           "AVAIL_FF": "141120",
           "UTIL_FF": "4",
-          "LUT": "11557",
+          "LUT": "10598",
           "AVAIL_LUT": "70560",
-          "UTIL_LUT": "16",
+          "UTIL_LUT": "15",
           "BRAM_18K": "0",
           "AVAIL_BRAM": "432",
           "UTIL_BRAM": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "0",
+          "UTIL_URAM": "0"
+        }
+      },
+      "krnl_mmult_Pipeline_Accum_C": {
+        "Latency": {
+          "LatencyBest": "6",
+          "LatencyAvg": "6",
+          "LatencyWorst": "6",
+          "PipelineII": "6",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "2.297"
+        },
+        "Loops": [{
+            "Name": "Accum_C",
+            "TripCount": "4",
+            "Latency": "4",
+            "PipelineII": "1",
+            "PipelineDepth": "1"
+          }],
+        "Area": {
+          "FF": "518",
+          "AVAIL_FF": "141120",
+          "UTIL_FF": "~0",
+          "LUT": "1136",
+          "AVAIL_LUT": "70560",
+          "UTIL_LUT": "1",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "432",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "360",
+          "UTIL_DSP": "0",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0"
@@ -1245,12 +1364,12 @@
             "PipelineDepth": "71"
           }],
         "Area": {
-          "FF": "1247",
+          "FF": "1218",
           "AVAIL_FF": "141120",
           "UTIL_FF": "~0",
-          "LUT": "3695",
+          "LUT": "3487",
           "AVAIL_LUT": "70560",
-          "UTIL_LUT": "5",
+          "UTIL_LUT": "4",
           "BRAM_18K": "0",
           "AVAIL_BRAM": "432",
           "UTIL_BRAM": "0",
@@ -1278,89 +1397,31 @@
         },
         "Loops": [{
             "Name": "outer_i",
-            "TripCount": "512",
+            "TripCount": "1024",
             "Latency": "",
             "PipelineII": "",
             "PipelineDepth": "",
             "Loops": [{
                 "Name": "outer_j",
-                "TripCount": "512",
+                "TripCount": "1024",
                 "Latency": "",
                 "PipelineII": "",
-                "PipelineDepth": "",
-                "Loops": [
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  },
-                  {
-                    "Name": "fill_C_inner",
-                    "TripCount": "",
-                    "Latency": "",
-                    "PipelineII": "",
-                    "PipelineDepth": "1"
-                  }
-                ]
+                "PipelineDepth": ""
               }]
           }],
         "Area": {
-          "BRAM_18K": "186",
+          "BRAM_18K": "122",
           "AVAIL_BRAM": "432",
-          "UTIL_BRAM": "43",
+          "UTIL_BRAM": "28",
           "DSP": "207",
           "AVAIL_DSP": "360",
           "UTIL_DSP": "57",
-          "FF": "17097",
+          "FF": "13910",
           "AVAIL_FF": "141120",
-          "UTIL_FF": "12",
-          "LUT": "25662",
+          "UTIL_FF": "9",
+          "LUT": "22464",
           "AVAIL_LUT": "70560",
-          "UTIL_LUT": "36",
+          "UTIL_LUT": "31",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0"
@@ -1371,7 +1432,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-12-04 19:45:32 EST",
+    "Time": "2023-12-05 21:22:12 EST",
     "ToolName": "vitis_hls",
     "ToolVersion": "2021.1"
   }
