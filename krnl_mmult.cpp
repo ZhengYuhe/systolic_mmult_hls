@@ -150,17 +150,12 @@ Kernel Description :
 
 #include <stdio.h>
 
-
-// Maximum Array Size
-#define DATA_SIZE 4096
+#define DATA_SIZE 64
 #define TILE_SIZE 4
-#define BATCH_SIZE 4
-#define DIM_K (DATA_SIZE / BATCH_SIZE)
-//#define SHIFT_BUFFER_LEN (TILE_SIZE * 2 -1)
+#define LAYERS 4
+#define DIM_K (DATA_SIZE / LAYERS)
 
 
-// TRIPCOUNT identifier
-const unsigned int c_size = TILE_SIZE;
 
 extern "C" {
 void krnl_mmult(const int* a, // Read-Only Matrix A
@@ -177,25 +172,25 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
 
     
     // Local memory to store input and output matrices
-    int localA[BATCH_SIZE][TILE_SIZE][DIM_K];
+    int localA[LAYERS][TILE_SIZE][DIM_K];
     #pragma HLS ARRAY_PARTITION variable = localA dim = 1 complete
     #pragma HLS ARRAY_PARTITION variable = localA dim = 2 complete
     //#pragma HLS ARRAY_PARTITION variable=localA dim =2 factor=2 type=cyclic
     
-    int localB[BATCH_SIZE][DIM_K][TILE_SIZE];
+    int localB[LAYERS][DIM_K][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = localB dim = 1 complete
     #pragma HLS ARRAY_PARTITION variable = localB dim = 3 complete
 
     int localC[TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = localC dim = 0 complete
 
-    int bufC[BATCH_SIZE][TILE_SIZE][TILE_SIZE];
+    int bufC[LAYERS][TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = bufC dim = 0 complete
 
-    int bufA[BATCH_SIZE][TILE_SIZE][TILE_SIZE];
+    int bufA[LAYERS][TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = bufA dim = 0 complete
 
-    int bufB[BATCH_SIZE][TILE_SIZE][TILE_SIZE];
+    int bufB[LAYERS][TILE_SIZE][TILE_SIZE];
     #pragma HLS ARRAY_PARTITION variable = bufB dim = 0 complete    
 
     outer_i:
@@ -213,7 +208,7 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
         readA:
         for (int i = i0; i < i0+TILE_SIZE; i ++){
             readA_i:
-            for (int t = 0; t < BATCH_SIZE; t ++){
+            for (int t = 0; t < LAYERS; t ++){
                 readA_k:
                 for (int k = 0; k < DIM_K; k ++){
                     localA[t][i-i0][k] = a[i * DATA_SIZE + t * DIM_K + k];
@@ -226,7 +221,7 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
         for(int j0=0; j0<DATA_SIZE; j0+=TILE_SIZE){
             
             fill_PE:
-            for (int t = 0; t < BATCH_SIZE; t++){
+            for (int t = 0; t < LAYERS; t++){
                 #pragma HLS UNROLL
                 fill_PE_i:
                 for(int i = 0; i < TILE_SIZE; i++){
@@ -264,7 +259,7 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
             readB:
             for (int j = j0; j < j0+TILE_SIZE; j ++){
                 readB_j:
-                for (int t = 0; t < BATCH_SIZE; t ++){
+                for (int t = 0; t < LAYERS; t ++){
                     readB_k:
                     for (int k = 0; k < DIM_K; k ++){
                         localB[t][k][j-j0] = b[j * DATA_SIZE + t * DIM_K + k];
@@ -290,7 +285,7 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
             for (int k = 0; k < (2*TILE_SIZE + DIM_K -1); k ++) {
             #pragma HLS pipeline
                 systolict:
-                for (int t = 0; t < BATCH_SIZE; t ++){
+                for (int t = 0; t < LAYERS; t ++){
                     systolici:
                     for (int i = TILE_SIZE-1; i >= 0; i--) {
                         systolicj:
@@ -308,7 +303,7 @@ void krnl_mmult(const int* a, // Read-Only Matrix A
 
             
             Accum_C:
-            for (int t = 0; t < BATCH_SIZE; t++){
+            for (int t = 0; t < LAYERS; t++){
                 #pragma HLS pipeline
                 Accum_C_i:
                 for (int i = 0; i < TILE_SIZE; i++){

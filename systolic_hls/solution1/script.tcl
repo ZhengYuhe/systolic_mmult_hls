@@ -5,8 +5,8 @@
 ############################################################
 open_project systolic_hls
 set_top krnl_mmult
-add_files systolic_test.h
 add_files krnl_mmult.cpp
+add_files systolic_test.h
 add_files -tb systolic_test.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
 open_solution "solution1" -flow_target vitis
 set_part {xczu3eg-sbva484-1-i}
