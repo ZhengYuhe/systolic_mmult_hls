@@ -61,12 +61,9 @@ int main() {
         source_hw_results[i] = 0;
     }
 
-    int a_row = DATA_SIZE;
-    int a_col = DATA_SIZE;
-    int b_col = DATA_SIZE;
-
+    
     std::cout << "starting krnl_mmult" << std::endl;
-    krnl_mmult(source_in1, source_in2, source_hw_results, a_row, a_col, b_col);
+    krnl_mmult(source_in1, source_in2, source_hw_results, DATA_SIZE, DATA_SIZE, DATA_SIZE);
     std::cout << "finished krnl_mmult" << std::endl;
 
     std::cout << "starting sw_mmult" << std::endl;
